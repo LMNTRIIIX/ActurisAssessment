@@ -1,0 +1,15 @@
+# .NET build outputs
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+
+# Submission patch
+submission.patch
