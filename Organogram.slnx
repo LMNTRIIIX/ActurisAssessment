@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Organogram.Tests/Organogram.Tests.csproj" />
+  <Project Path="Organogram/Organogram.csproj" />
+</Solution>
