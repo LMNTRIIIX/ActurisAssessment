@@ -4,7 +4,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        OrganogramBuilder builder = new OrganogramBuilder();
+
+        List<OrganizationRecord> records = builder.ParseData(ExampleData.CompaniesData);
+        List<OrganizationRecord> roots = builder.BuildHierarchy(records);
+        string organogram = builder.CreateOrganogram(roots);
+
+        Console.WriteLine(organogram);
     }
 }
 
