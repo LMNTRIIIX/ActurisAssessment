@@ -138,4 +138,31 @@ public class OrganogramTests
 
         Assert.That(result, Is.EqualTo(expected));
     }
+
+    [Test]
+    public void CreateOrganogram_ShouldMatchBriefExample()
+    {
+        string data = """
+    1,0,Peter,Ndoro,IBM,Johannesburg,Managing Director,1,2,3
+    2,1,Jackie,Smith,IBM,Johannesburg,Assistant Director,1,2,3
+    3,1,Chris,Thorpe,IBM,Johannesburg,Technical Director,1,2,3
+    4,3,John,Major,IBM,Johannesburg,Lead Developer,1,2,3
+    5,4,Peter,South,IBM,Johannesburg,Senior Developer,1,2,3
+    6,4,James,McDonald,IBM,Johannesburg,Developer,1,2,3
+    """;
+
+        List<OrganizationRecord> records = service.ParseData(data);
+        List<OrganizationRecord> roots = service.BuildHierarchy(records);
+        string result = service.CreateOrganogram(roots);
+
+        string expected =
+            "Peter Ndoro, IBM, Managing Director" + Environment.NewLine +
+            " -> Jackie Smith, IBM, Assistant Director" + Environment.NewLine +
+            " -> Chris Thorpe, IBM, Technical Director" + Environment.NewLine +
+            "    -> John Major, IBM, Lead Developer" + Environment.NewLine +
+            "       -> Peter South, IBM, Senior Developer" + Environment.NewLine +
+            "       -> James McDonald, IBM, Developer";
+
+        Assert.That(result, Is.EqualTo(expected));
+    }
 }
